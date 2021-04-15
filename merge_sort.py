@@ -43,7 +43,7 @@ def merge(arr,l,m,r):
     p1 =l
     p2 = m + 1
     while p1 <= m and p2 <= r:
-        if arr[p1] < arr[p2]: # 不同点
+        if arr[p1] < arr[p2]: # 不同点 小于的时候先copy左边，相等的时候，先copy右边
             small_sum += arr[p1]*(r-p2+1) # 不同点
             help.append(arr[p1])
             p1 += 1
