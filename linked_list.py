@@ -143,6 +143,7 @@ def getLoopNode(head):
 def NoLoop(head1, head2):
     cur1 = head1
     cur2 = head2
+    # we first find which list is longer and compute the difference of length
     n = 0
     while cur1.next:
         n += 1
@@ -150,12 +151,12 @@ def NoLoop(head1, head2):
     while cur2.next:
         n -= 1
         cur2 = cur2.next
-    if cur1 != cur2:
+    if cur1 != cur2: # if two lists intersect, end points of both lists must be equal
         return None
     cur1 = head1 if n > 0 else head2 # 哪个链表长，则头变为哪个
     cur2 = head2 if cur1 == head1 else head1
     n = abs(n)
-    # 让长的链表先走 n 步
+    # 让长的链表先走 差值 n 步
     while n != 0:
         n -= 1
         cur1 = cur1.next
@@ -163,3 +164,48 @@ def NoLoop(head1, head2):
         cur1 = cur1.next
         cur2 = cur2.next
     return cur1
+
+def bothLoop(head1, loop1, head2, loop2):
+    ''' 三种情况，两个链表各自成环，没有交点
+        2. 共享环，第一个入环节点是相同的，第一个相交的位置在环外面，该情况类似于无环链表找交点问题
+        3. 共享环，入环节点不同，'''
+    cur1, cur2 = None, None
+    # 如果两个链表的入环位置相同，等同于无环链表相交问题，不必关心环的情况，只需要查看在入环前是否有交点
+    if loop1 == loop2:
+        cur1 = loop1
+        cur2 = loop2
+        n = 0 # find difference of length
+        while cur1 != loop1:
+            n += 1
+            cur1 = cur1.next
+        while cur2 != loop2:
+            n -= 1
+            cur2 = cur2.next
+        cur1 = head1 if n > 0 else head2 # 长链表头节点
+        cur2 = head2 if cur1 == head1 else head1 # 短链表头节点
+        n = abs(n)
+        for i in range(n):
+            cur1 = cur1.next
+        while cur1 !=cur2:
+            cur1 = cur1.next
+            cur2 = cur2.next
+        return cur1
+    else:
+        # 区分情况一和三
+        cur1 = loop1.next
+        while cur1 != loop1:
+            if cur1 == loop2: # 找到了重合点
+                return loop1
+            cur1 = cur1.next
+        return None
+
+def getIntersectNode(head1, head2):
+    # first, we want to find if there are any loops in both lists
+    loop1 = getLoopNode(head1)
+    loop2 = getLoopNode(head2)
+    # if there are no loops in both lists
+    if not loop1 and not loop2:
+        return NoLoop(head1,head2)
+    if loop1 and loop2:
+        return bothLoop(head1, loop1, head2, loop2)
+    return None # 一个有环，一个无环，则为空
