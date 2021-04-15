@@ -50,7 +50,6 @@ def merge(arr,l,m,r):
         else:
             help.append(arr[p2])
             p2 += 1
-
     for i in range(p1,m+1):
         help.append(arr[i])
     for i in range(p2, r+1):
