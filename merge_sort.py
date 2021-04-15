@@ -21,7 +21,7 @@ def merge(arr,l,m,r):
 def mergesort(arr,l,r):
     if l == r:
         return
-    mid = (r+l)//2
+    mid = l+(r-l)//2
     mergesort(arr,l,mid)
     mergesort(arr,mid+1,r)
     merge(arr,l,mid,r)
@@ -61,7 +61,7 @@ def merge(arr,l,m,r):
 def mergesort(arr,l,r):
     if l == r:
         return 0
-    mid = (r+l)//2
+    mid = l+(r-l)//2
     return mergesort(arr,l,mid) + mergesort(arr,mid+1,r) + merge(arr,l,mid,r)
 
 arr = [1,3,4,1,5]
