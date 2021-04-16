@@ -1,0 +1,37 @@
+# using recursion
+def f(node):
+    if not node:
+        return
+    # 1 pre order
+    f(node.left)
+    # 2 in order
+    f(node.right)
+    # 3 post order
+
+'''
+pre order
+1. stack 弹出当前cur，打印
+2. 先加右再加左 (弹出顺序就是先左再右)
+3. stack空停止
+
+in order
+用 stack 进行 dfs
+
+post order
+利用stack
+进入顺序改为先加左再加右，这样弹出顺序则为中右左
+不着急打印，收起来所有的弹出数值，逆序打印，则为左右中
+'''
+def inorder(head):
+     if head:
+         stack = []
+         cur = head
+         while stack or cur:
+             # 阶段一 一直加左边的东西 直到没有左子树
+             if cur:
+                 stack.append(cur)
+                 cur = cur.left
+             else:
+                 cur = stack.pop()
+                 print(cur.val)
+                 cur = cur.right
