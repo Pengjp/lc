@@ -35,3 +35,43 @@ def inorder(head):
                  cur = stack.pop()
                  print(cur.val)
                  cur = cur.right
+
+class Solution:
+    def threeOrders(self , root ):
+        stack = []
+        ans = [[],[],[]]
+        head = root
+        # pre order
+        stack.append(head)
+        while stack:
+            cur = stack.pop()
+            ans[0].append(cur.val)
+            if cur.right:
+                stack.append(cur.right)
+            if cur.left:
+                stack.append(cur.left)
+        # in order
+        cur = root
+        stack = []
+        while stack or cur:
+            if cur:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                cur = stack.pop()
+                ans[1].append(cur.val)
+                cur = cur.right
+        # post order
+        stack = []
+        temp = []
+        head = root
+        stack.append(head)
+        while stack:
+            cur = stack.pop()
+            temp.append(cur.val)
+            if cur.left:
+                stack.append(cur.left)
+            if cur.right:
+                stack.append(cur.right)
+        ans[2] = list(reversed(temp))
+        return ans 
