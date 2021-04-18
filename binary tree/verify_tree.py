@@ -57,4 +57,87 @@ head.right.left = Node(7)
 head.right.right = Node(10)
 
 ans = process(head)
+def inorder(head):
+    stack = []
+    ans = []
+    cur = head
+    while cur or stack:
+        if cur:
+            stack.append(cur)
+            cur = cur.left
+        else:
+            cur = stack.pop()
+            ans.append(cur.val)
+            cur = cur.right
+    for i in range(1,len(ans)):
+        if ans[i] < ans[i-1]:
+            print('not BST')
+            return
+    print('is BST')
 print(ans.isBST,ans.minval,ans.maxval)
+inorder(head)
+
+''' verify if tree is a full binary tree '''
+class Info:
+    # record the number of nodes and maximus height for a given node(tree)
+    def __init__(self, nodes, height):
+        self.nodes = nodes
+        self.height = height
+def process(x)-> Info:
+    if not x: # empty tree
+        return Info(0,0)
+    leftInfo = process(x.left)
+    rightInfo = process(x.right)
+
+    nodes = leftInfo.nodes + rightInfo.nodes + 1
+    height = max(leftInfo.height, rightInfo.height) + 1
+    return Info(nodes, height)
+def isFull(head):
+    info = process(head)
+    N = info.nodes
+    H = info.height
+    # N == 2^H - 1
+    return N == (1 << H) - 1
+
+head = Node(5)
+head.left = Node(3)
+head.right = Node(8)
+head.left.left = Node(2)
+head.left.right = Node(4)
+head.right.left = Node(7)
+head.right.right = Node(10)
+
+print(isFull(head))
+
+''' verify if a tree is balanced '''
+class Info:
+    # record the number of nodes and maximus height for a given node(tree)
+    def __init__(self, isBalanced, height):
+        self.isBalanced = isBalanced
+        self.height = height
+def process(x)-> Info:
+    if not x: # empty tree
+        return Info(True,0)
+    leftInfo = process(x.left)
+    rightInfo = process(x.right)
+
+    height = max(leftInfo.height, rightInfo.height) + 1
+    isBalanced = False
+    if leftInfo.isBalanced and rightInfo.isBalanced and abs(leftInfo.height - rightInfo.height) <= 1:
+        isBalanced = True
+    return Info(isBalanced, height)
+
+def isBalanced(head):
+    return process(head).isBalanced
+
+
+head = Node(5)
+head.left = Node(3)
+head.right = Node(8)
+head.left.left = Node(2)
+head.left.right = Node(4)
+head.right.left = Node(7)
+head.right.right = Node(10)
+head.left.left.left = Node(2)
+head.left.left.left.left = Node(2)
+print(isBalanced(head))
