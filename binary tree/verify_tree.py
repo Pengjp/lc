@@ -164,4 +164,22 @@ def IsCBT(root):
         if not l or not r: # 遇到了没有两个孩子的节点
             isMeet = True
     return True
+'''
+Use BFS to do a level order traversal,
+add childrens to the bfs queue,
+until we met the first empty node.
+
+For a complete binary tree,
+there should not be any node after we met an empty one.
+
+Time O(N), Space O(N)
+'''
+def isCompleteTree(self, root):
+    bfs = [root]
+    i = 0
+    while bfs[i]:
+        bfs.append(bfs[i].left)
+        bfs.append(bfs[i].right)
+        i += 1
+    return not any(bfs[i:])
 print(IsCBT(head))
