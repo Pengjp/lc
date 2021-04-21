@@ -141,3 +141,27 @@ head.right.right = Node(10)
 head.left.left.left = Node(2)
 head.left.left.left.left = Node(2)
 print(isBalanced(head))
+
+''' check if tree is completed '''
+from collections import deque
+def IsCBT(root):
+    queue = deque()
+    queue.append(root)
+    isMeet = False
+    l,r = None, None
+    while queue:
+        head = queue.popleft()
+        l = head.left
+        r = head.right
+        if l == None and r != None: # 有右无左
+            return False
+        if isMeet and (l != None or r != None):
+            return False
+        if l:
+            queue.append(l)
+        if r:
+            queue.append(r)
+        if not l or not r: # 遇到了没有两个孩子的节点
+            isMeet = True
+    return True
+print(IsCBT(head))
