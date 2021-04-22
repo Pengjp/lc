@@ -69,3 +69,25 @@ def max_width(head):
 
     return max(max_cnt, cnt_node) # we neeed to check the last level
 print('max width is', max_width(head))
+
+''' level order traversal '''
+from collections import deque
+class Solution:
+    def levelOrder(self , root ):
+        if not root:
+            return []
+        queue = deque()
+        queue.append([root,1])
+        ans = []
+        while queue:
+            root,level = queue.popleft()
+            l = root.left
+            r = root.right
+            if len(ans) < level:
+                ans.append([])
+            ans[level-1].append(root.val)
+            if l:
+                queue.append([l,level+1])
+            if r:
+                queue.append([r,level+1])
+        return ans
