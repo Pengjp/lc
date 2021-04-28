@@ -29,3 +29,16 @@ def solve1(index,leftWeight):
     return res
 
 print(solve1(0,10))
+
+def solve2(w,v,index,rest):
+    if rest <= 0:
+        return 0
+    if index == len(w):
+        return 0
+    p1 = solve2(w,v,index+1, rest)
+    p2 = -1
+    if rest >= w[index]:
+        p2 = solve2(w,v,index+1, rest-w[index]) + v[index]
+    return max(p1,p2)
+
+print(solve2(w,v,0,10))
