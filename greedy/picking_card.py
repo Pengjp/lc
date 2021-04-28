@@ -6,4 +6,9 @@ def f(arr,i,j):
 def s(arr,i,j):
     if i == j:
         return 0
-    return min(f(arr,i+1,j), f(arr,i-j-1))
+    return min(f(arr,i+1,j), f(arr,i,j-1))
+
+arr = [1,2,100,4]
+print(f(arr,0,3))
+print(s(arr,0,3))
+print(max(f(arr,0,3),s(arr,0,3)))
