@@ -20,12 +20,11 @@ def solve1(index,leftWeight):
     if index >= len(w):
         return 0       #物品已用完,剩下的重量装不了物品，返回价值0
     if w[index] > leftWeight:       #当前位置的物品重量大于剩余重量，则不选择该物品，从它下一个物品进行背包问题
-        res = solve1(index+1, leftWeight)
+        return solve1(index+1, leftWeight)
     else:
         #还剩物品，并且当前位置的物品重量小于剩余重量，则就取该物品和不取该物品两种情况进行递归
-        res=max(solve1(index+1, leftWeight),\
+        return max(solve1(index+1, leftWeight),\
                 solve1(index+1, leftWeight-w[index]) + v[index])
-    return res
 
 print(solve1(0,10))
 
