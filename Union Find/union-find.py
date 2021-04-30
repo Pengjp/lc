@@ -30,6 +30,7 @@ class UnionFind:
             # print(a,'father is',aF)
             # print(b,'father is',bF)
             if aF != bF:
+                # 把数量小的集合的头拼在数量大的集合
                 aRank = self.rankMap[aF]
                 bRank = self.rankMap[bF]
                 big = aF if aRank >= bRank else bF
