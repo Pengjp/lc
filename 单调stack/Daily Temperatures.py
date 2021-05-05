@@ -1,7 +1,7 @@
 ''' 739. Daily Temperatures '''
 def rightMostCloseMin(arr):
     ''' find the right cloest value that is smaller that each element '''
-    # a stack to to record the position, stricly increasing order
+    # a stack to to record the position, stricly increasing order from small to large
     stack = []
     ans = [0] * len(arr)
     for i in range(len(arr)):
