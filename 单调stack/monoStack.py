@@ -30,4 +30,4 @@ def getNearLess(arr):
             res[index][1] = -1
     return res
 
-print(getNearLess([1,2,3,1,4,4,1,2,2,1,0]))
+print(getNearLess([3,4,1,5,6,2,7]))
