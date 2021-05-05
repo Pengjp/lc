@@ -1,13 +1,23 @@
+from Node import Node
 # using recursion
 def f(node):
     if not node:
         return
     # 1 pre order
+    print('first',node.val)
     f(node.left)
     # 2 in order
+    print('second',node.val)
     f(node.right)
     # 3 post order
+    print('third',node.val)
 
+head = Node(1)
+head.left = Node(2)
+head.right = Node(3)
+# 该方程展示的是递归顺序，三种顺序是对递归序的不同加工
+# 先序是第一次到一个节点，就打印，中序是第二次，后序是最后一次
+f(head)
 '''
 pre order
 1. stack 弹出当前cur，打印
@@ -74,4 +84,4 @@ class Solution:
             if cur.right:
                 stack.append(cur.right)
         ans[2] = list(reversed(temp))
-        return ans 
+        return ans
