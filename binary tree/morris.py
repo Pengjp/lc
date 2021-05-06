@@ -1,4 +1,4 @@
-'''
+-'''
 Morris遍历细节
 假设来到当前节点cur，开始时cur来到头节点位置
 1）如果cur没有左孩子，cur向右移动(cur = cur.right)
