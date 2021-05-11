@@ -36,5 +36,6 @@ def waysdp(N:int, start:int, K:int,end:int) -> int:
             dp[row][col] = dp[row-1][col-1] + dp[row+1][col-1]
     return dp[start][K]
 
-print(waysdp(7,4,9,5))
-print(recursive(7,4,9,5))
+N, start, K, end = 7, 4, 9, 5
+print(waysdp(N, start, K, end))
+print(recursive(N, start, K, end))
