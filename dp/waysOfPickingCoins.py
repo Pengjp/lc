@@ -29,7 +29,7 @@ def dp(arr, aim):
             dp[i][rest] = dp[i+1][rest]
             if rest - arr[i] >= 0: # 不越界，加上本行的下一个
                 dp[i][rest] += dp[i][rest-arr[i]]
-    return dp[0][aim]
+    return dp[0][aim] #根据主函数返回 print(recursive(arr, 0, sum))
 arr = [5, 2, 3]
 sum = 10
 print(recursive(arr, 0, sum))
