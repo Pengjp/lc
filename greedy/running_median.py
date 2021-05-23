@@ -6,11 +6,12 @@ def running_median(arr):
 
     for i in arr:
         print('adding',i)
+        # max为空 或者加入数值小于等于max顶部，放到max
         if len(maxpq) == 0 or i <= -maxpq[0]:
             heapq.heappush(maxpq, -i)
         else:
             heapq.heappush(minpq, i)
-
+        # max和min的长度差距为2时候，长的转移到短的
         if abs(len(maxpq) - len(minpq)) > 1:
             if len(maxpq) > len(minpq):
                 heapq.heappush(minpq, -heapq.heappop(maxpq))
