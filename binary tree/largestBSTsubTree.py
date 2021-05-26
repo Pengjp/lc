@@ -8,6 +8,8 @@
 '''
 MAX_VALUE = 99999999
 MIN_VALUE = -99999999
+# 里面返回的信息是关于当前节点的情况[最大值，最小值，BSTsize]
+# 每次递归，返回信息都是左右子树的最大最小值和bst的size
 def helper(root):
     if not root: # 如果是空节点，则bst的size是0
         return [MIN_VALUE, MAX_VALUE，0] # 当前树的最大最小是则都是invalid的
