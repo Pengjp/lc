@@ -27,7 +27,7 @@ def max_submatrix(matrix):
         temp = matrix[row]
         ans = max(maxSubArray(temp), ans)
         for subrow in range(row + 1, ROW):
-            temp = temp = [sum(x) for x in zip(temp, matrix[subrow])]
+            temp = [sum(x) for x in zip(temp, matrix[subrow])]
             ans = max(maxSubArray(temp), ans)
     return ans
 
