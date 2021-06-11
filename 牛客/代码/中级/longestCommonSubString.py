@@ -17,4 +17,24 @@ def process(text1, text2):
     for i, c in enumerate(text1):
         for j, d in enumerate(text2):
             dp[i + 1][j + 1] = 1 + dp[i][j] if c == d else max(dp[i][j + 1], dp[i + 1][j])
-    return dp[-1][-1]
+            
+    if dp[-1][-1] == 0:
+        return "-1"
+    else:
+        ans = []
+        i = len(text1)
+        j = len(text2)
+        while i >= 1 and j >= 1:
+            if text1[i-1] == text2[j-1]:
+                ans.append(text1[i-1])
+                i -= 1
+                j -= 1
+            elif dp[i][j-1] >= dp[i-1][j]:
+                j -= 1
+            else:
+                i -= 1
+        ans.reverse()
+        return "".join(ans)
+
+
+print(process('abc','abc'))
