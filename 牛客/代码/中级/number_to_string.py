@@ -34,7 +34,7 @@ def dpway2(arr):
     for i in range(2,n+1):
         one = int(arr[i-1])
         two = int(arr[i-2]) * 10 + int(arr[i-1])
-        print(i, one, two)
+        # print(i, one, two)
         if one >= 1 and one <= 9:
             dp[i] += dp[i-1]
         if two < 27 and two >= 10:
